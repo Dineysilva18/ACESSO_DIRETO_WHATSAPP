@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<title>Whatsapp mensagens rápidas</title>
+
+	<script type="text/javascript">
+
+	function exibeversao(){
+
+		if(screen.width<=800){
+			document.getElementById("versao").innerHTML="Versão mobile ativa";
+		}else{
+			document.getElementById("versao").innerHTML="Versão desktop ativa";
+		}
+
+	}
+
+	function quebralinha(){
+		//%0A - quebra linha; %0D - espaçamento.
+		var frase = document.getElementById("mensagem").value;
+		var quebra_linha = "%0A";
+		document.getElementById("mensagem").value=frase+quebra_linha;
+	}
+
+	function entracel(){
+		var numero = document.getElementById("whatsapp").value;
+		var texto = document.getElementById("mensagem").value;
+
+		var razao  = numero/1000000000;
+
+		if(razao != 0) //Conjunto em branco é lido como 0.
+		{
+			if( razao >= 1 && razao < 100)
+			{
+			document.getElementById("whatsapp").value="";
+			document.getElementById("mensagem").value="";
+			window.location.href="https://api.whatsapp.com/send?1=pt_BR&phone=55"+numero+"&text="+texto+"%0AContato realizado pelo endereço: "+window.location.href+"";
+			}else{
+			alert("Número inválido! Digite novamente um número correto de 10 ou 11 dígitos.");
+			document.getElementById("whatsapp").value="";
+			}
+
+		}else{
+		alert("Este campo não pode permanecer vazio, com valor 0 ou com caracteres. Digite um número válido!");
+		document.getElementById("whatsapp").value="";
+		}
+
+	}
+
+	function entrapc(){
+		var numero = document.getElementById("whatsapp").value;
+		var texto = document.getElementById("mensagem").value;
+
+		var razao = numero/1000000000;
+
+		if( razao != 0)
+		{
+			if( razao >= 1 && razao < 100)
+			{
+			document.getElementById("whatsapp").value="";
+			document.getElementById("mensagem").value="";
+			window.open("https://api.whatsapp.com/send?1=pt_BR&phone=55"+numero+"&text="+texto+"%0AContato realizado pelo endereço: "+window.location.href+"","_blank");
+			}else{
+			alert("Número inválido! Digite novamente um número correto de 10 ou 11 dígitos.");
+			document.getElementById("whatsapp").value="";
+			}
+
+		}else{
+		alert("Este campo não pode permanecer vazio, com valor 0 ou com caracteres. Digite um número válido!");
+		document.getElementById("whatsapp").value="";
+		}
+
+	}
+
+	</script>
+
+	<style type="text/css">
+
+
+		@media (max-device-width: 800px){
+		html{
+		width:auto; /*largura definida pela quantidade de conteúdo limitada com max-width. */
+		max-width: 100%;
+		margin: 0;
+		height: auto;
+		}
+
+		body{
+		font-size: 12pt;
+		font-family: Times New Roman;
+		color: #0000FF;
+		}
+
+		#whatsapp{
+		font-family: Times New Roman; 
+		font-size: 12pt;
+		}
+
+		#botaocel{
+		display: block;
+		font-family: Times New Roman; 
+		font-size: 12pt;
+		}
+
+		#botaopc{
+		display: none;
+		}
+
+		.adc_quebralinha{
+		width: auto;
+		max-width: 100%;
+		font-size: 8pt;
+		cursor: pointer;
+		padding: 2px;
+		background-color: rgba(0,0,0,0.25);
+		border: 1px solid #000000;
+		border-radius: 2px;
+			
+		position: relative;
+		left: -130px;
+		bottom: 2px;
+		}
+
+	}
+
+		@media (min-device-width: 801px){
+		html{
+		width:auto; /*largura definida pela quantidade de conteúdo limitada com max-width. */
+		max-width: 80%;
+		margin: 0;
+		margin-left: 10%;
+		height: auto;
+		}
+
+		body{
+		font-size: 16pt;
+		font-family: Times New Roman;
+		color: #0000FF;
+		}
+
+		#whatsapp{
+		font-family: Times New Roman;
+		font-size: 16pt;
+		}
+
+		#botaopc{
+		display: block;
+		font-family: Times New Roman; 
+		font-size: 16pt;
+		}
+
+		#botaocel{
+		display: none;
+		}
+
+		.adc_quebralinha{
+		width: auto;
+		max-width: 100%;
+		font-size: 12pt;
+		cursor: pointer;
+		padding: 2px;
+		background-color: rgba(0,0,0,0.25);
+		border: 1px solid #000000;
+		border-radius: 2px;
+		
+		position: relative;
+		left: -115px;
+		bottom: 2px;
+		}
+
+	}
+
+	</style>
+
+</head>
+
+<body onload="exibeversao()">
+
+	<section>
+
+		<h5 align="left" id="versao" style="color:#000000;"></h5>
+
+		<h1 align="center">Acesse o contato desejado e envie mensagens para números whatsapp que não constam em sua agenda; e para o seu também &#128516; .</h1>
+
+		<center>
+
+			<p>
+
+				<p>
+
+					Digite seu whatsapp ou o whatsapp de alguém com DDD (10 ou 11 dígitos):
+
+				</p>
+				
+				<p>
+					<input type="number" id="whatsapp" style="max-width: 100%;" />
+				</p>
+				<p>
+
+					Mensagem ao destinatário: (não obrigatória)
+					
+					<br>
+					<br>
+
+					<span onclick="quebralinha()" class="adc_quebralinha">Adicionar salto</span>
+					
+					<br>
+					
+					<textarea id="mensagem" rows="9" cols="45" maxlength="500" style="max-width: 100%;"></textarea>
+	
+				</p>
+
+				<button onclick="entracel()" id="botaocel">Converse</button>
+
+				<button onclick="entrapc()" id="botaopc">Converse</button>
+
+			</p>
+
+		</center>
+
+	</section>
+
+</body>
+
+</html>
